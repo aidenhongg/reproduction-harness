@@ -1,0 +1,211 @@
+{
+  "main": {
+    "id": "8a870a78e02d259c",
+    "type": "split",
+    "children": [
+      {
+        "id": "fb74588fc70c6d55",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "224382c6ee5bb3af",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "PLAN-papers.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "PLAN-papers"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "ee8744b1f17c9920",
+    "type": "split",
+    "children": [
+      {
+        "id": "8ad5a715ff683d86",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "73f76f40e0fbce0b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "4f3d56665b1f7546",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "c64be458c833e606",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "1902c8eb9473668f",
+    "type": "split",
+    "children": [
+      {
+        "id": "f344f2aa37d6e491",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ad30566d0536436c",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "PLAN-papers.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for PLAN-papers"
+            }
+          },
+          {
+            "id": "487b4339dd1a85ad",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "PLAN-papers.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from PLAN-papers"
+            }
+          },
+          {
+            "id": "d80e942f7e2dc9f9",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "8d3729469212954d",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "a6eab2641a0c4262",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "PLAN-papers.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of PLAN-papers"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "224382c6ee5bb3af",
+  "lastOpenFiles": [
+    "PLAN-roles.md",
+    "PLAN-workflows.md",
+    "project-setup-draft.md",
+    "project-setup-draft.md.tmp.24292.470c482f44a8",
+    "project-setup-draft.md.tmp.24292.2019ff3e0aa9",
+    "project-setup-draft.md.tmp.24292.20a1bc540a42",
+    "project-setup-draft.md.tmp.24292.35f2baf1fa9b",
+    "project-setup-draft.md.tmp.24292.7bb789c18a37",
+    "PLAN-papers.md",
+    "PLAN-papers.md.tmp.24292.6055296022bb",
+    "PLAN-workflows.md.tmp.24292.0adc071f95a0",
+    "PLAN-roles.md.tmp.24292.1713abe2a40f",
+    "PLAN-factories.md",
+    "PLAN-factories.md.tmp.24292.ebcb5742d3c0",
+    "project-setup-draft.md.tmp.24292.8f2a361c9ede",
+    "CLAUDE.md",
+    "graph-draft/researcher.md",
+    "graph-draft/diagnoser.md",
+    "graph-draft/driver.md",
+    "graph-draft/plan-executor.md",
+    "graph-draft/planner.md",
+    "graph-draft/in-place-fixer.md",
+    "Untitled.md"
+  ]
+}

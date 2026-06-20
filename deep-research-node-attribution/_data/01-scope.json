@@ -1,0 +1,31 @@
+﻿{
+    "question":  "Survey the most recent state-of-the-art (prioritize 2025, then 2024) methods for ATTRIBUTING and LOCALIZING errors/failures to specific NODES in existing agentic LLM workflows and multi-agent systems, where a \"node\" is a discrete workflow-graph component (node, agent, module, block, component, or tool-call step) and NOT an individual chain-of-thought reasoning step unless the method explicitly bridges step-level signals up to node/agent-level blame. Cover: (1) leading methods/benchmarks for automated failure attribution in multi-agent / compound LLM systems (Who\u0026When, MAST taxonomy, TRAIL, Agent-as-a-Judge, AgentDebug, Microsoft\u0027s agentic failure-mode taxonomy, newer 2025 work) with attribution unit, algorithm (all-at-once vs step-by-step vs binary-search vs causal/counterfactual), inputs (trace/log/graph), and reported accuracy; (2) terminology deep-dive on node vs block vs chunk vs span vs module vs agent vs step mapped to workflow-graph-NODE-level vs token/reasoning-step granularity; (3) causal/counterfactual attribution that pinpoints the responsible node (credit/blame assignment, ablation, intervention, counterfactual replay); (4) methods producing actionable localization (\"node X is faulty, error category Y\") enabling targeted conservative fixes (QC/self-check loop, human-in-the-loop gate, missing tool call, prompt revision) to an EXISTING workflow. Exclude/down-weight pure CoT step verification with no node/agent mapping (ProcessBench-style PRMs), pure textual-gradient/prompt-optimization (TextGrad, DSPy), and from-scratch workflow generators (AFlow, ADAS, GPTSwarm-as-generator). Deliver a cited report grouping methods by attribution unit and technique, a comparison table, and a synthesis of which approaches best support conservative node-level optimization of an existing agentic workflow.",
+    "summary":  "The working directory (existing-optim) is empty apart from a .claude folder, so there is no local codebase context to mine; this is a pure literature-survey task and the angles are derived entirely from the question. Strategy: split the question along its four core sub-questions plus a freshness axis, assigning each search angle to a non-overlapping slice — (a) the canonical named benchmarks/methods, (b) causal/counterfactual blame-assignment techniques, (c) the node-vs-span-vs-step terminology disambiguation, (d) the actionable-repair / practitioner end, and (e) a deliberate 2025-frontier sweep to surface work newer than the named anchors. This maximizes coverage while keeping each query specific enough to surface high-signal arXiv/benchmark/industry sources and avoids the excluded PRM / textual-gradient / from-scratch-generation literature.",
+    "angles":  [
+                   {
+                       "label":  "broad/primary — canonical named methods \u0026 benchmarks",
+                       "query":  "automated failure attribution multi-agent LLM systems benchmark Who\u0026When MAST taxonomy TRAIL Agent-as-a-Judge AgentDebug error localization 2025",
+                       "rationale":  "Anchors directly on the flagship works the user named, surfacing the primary papers, their attribution units (agent/step/module), algorithms (all-at-once vs step-by-step vs binary search), and reported accuracy for the comparison table."
+                   },
+                   {
+                       "label":  "academic/technical — causal \u0026 counterfactual blame assignment",
+                       "query":  "causal counterfactual credit blame assignment responsible agent node failure compound LLM pipeline ablation intervention counterfactual replay 2025",
+                       "rationale":  "Targets core question 3 — techniques that pinpoint the culprit node via causal intervention, ablation, or counterfactual replay rather than LLM-judge classification, which is the most rigorous and most likely under-surfaced technique class."
+                   },
+                   {
+                       "label":  "terminology disambiguation — node vs span vs module vs step granularity",
+                       "query":  "agentic workflow graph node agent module block span step granularity error localization trace attribution definition fine-grained vs coarse",
+                       "rationale":  "Drives core question 2, mapping how papers define node/block/chunk/span/module/agent/step so each method can be classified as workflow-NODE-level (relevant) vs token/reasoning-step level (down-weighted), including methods that bridge step signals up to node blame."
+                   },
+                   {
+                       "label":  "practitioner/actionable — targeted node repair of existing workflows",
+                       "query":  "diagnose repair existing agentic workflow faulty node error category targeted fix self-check human-in-the-loop gate prompt revision multi-agent debugging 2025",
+                       "rationale":  "Covers core question 4 and the synthesis goal: methods that not only localize but emit an error category and support a conservative targeted edit (QC loop, HITL gate, missing tool call, prompt fix) to an already-running workflow, while filtering out from-scratch generators."
+                   },
+                   {
+                       "label":  "recent frontier sweep — newest 2025 work beyond named anchors",
+                       "query":  "arxiv 2025 LLM agent trace error attribution failure mode taxonomy fault localization multi-agent debugging compound AI system evaluation survey",
+                       "rationale":  "A deliberately open freshness query to discover 2025 papers, surveys, and Microsoft-style failure-mode taxonomies newer than or adjacent to the named anchors, reducing the risk of missing recent SOTA the user didn\u0027t name."
+                   }
+               ]
+}

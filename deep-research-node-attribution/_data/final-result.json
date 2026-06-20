@@ -1,0 +1,334 @@
+{
+  "summary": "Deep research harness — fan-out web searches, fetch sources, adversarially verify claims, synthesize a cited report.",
+  "agentCount": 100,
+  "logs": [
+    "Q: Survey the most recent state-of-the-art (prioritize 2025, then 2024) methods for…",
+    "Decomposed into 5 angles: broad/primary — canonical named methods & benchmarks, academic/technical — causal & counterfactual blame assignment, terminology disambiguation — node vs span vs module vs step granularity, practitioner/actionable — targeted node repair of existing workflows, recent frontier sweep — newest 2025 work beyond named anchors",
+    "terminology disambiguation — node vs span vs module vs step granularity: 6 results",
+    "broad/primary — canonical named methods & benchmarks: 6 results",
+    "broad/primary — canonical named methods & benchmarks: 2 novel (4 filtered)",
+    "recent frontier sweep — newest 2025 work beyond named anchors: 6 results",
+    "recent frontier sweep — newest 2025 work beyond named anchors: 2 novel (4 filtered)",
+    "academic/technical — causal & counterfactual blame assignment: 6 results",
+    "academic/technical — causal & counterfactual blame assignment: 5 novel (1 filtered)",
+    "practitioner/actionable — targeted node repair of existing workflows: 6 results",
+    "practitioner/actionable — targeted node repair of existing workflows: 3 novel (3 filtered)",
+    "Fetched 18 sources → 88 claims → verifying top 25",
+    "\"Agent-level blame ('Who') is assigned using Shaple…\": 3-0 ✓",
+    "\"The paper introduces a failure attribution framewo…\": 3-0 ✓",
+    "\"On the Who&When benchmark the framework reaches ag…\": 3-0 ✓",
+    "\"Microsoft's Taxonomy of Failure Modes in Agentic A…\": 3-0 ✓",
+    "\"The taxonomy explicitly identifies a category of N…\": 3-0 ✓",
+    "\"The core causal mechanism is the Performance Causa…\": 3-0 ✓",
+    "\"The attribution UNIT is the individual STEP within…\": 3-0 ✓",
+    "\"CausalFlow performs failure attribution by computi…\": 3-0 ✓",
+    "\"The method produces actionable localization: a pre…\": 3-0 ✓",
+    "\"The whitepaper does NOT provide a framework or alg…\": 3-0 ✓",
+    "\"AgenTracer attributes failure at the agent/step le…\": 3-0 ✓",
+    "\"DoVer is an intervention-driven (Do-then-Verify) a…\": 3-0 ✓",
+    "\"AgenTracer's core attribution algorithm is causal/…\": 2-1 ✓",
+    "\"DoVer argues that single-step or single-agent fail…\": 3-0 ✓",
+    "\"AgenTracer produces ACTIONABLE localization that e…\": 3-0 ✓",
+    "\"Off-the-shelf state-of-the-art reasoning LLMs are …\": 3-0 ✓",
+    "\"A2P attributes failures to a specific (agent, step…\": 3-0 ✓",
+    "\"DoVer's intervention-based repair produces measura…\": 0-3 ✗",
+    "\"A2P is a counterfactual/causal-intervention attrib…\": 3-0 ✓",
+    "\"The Who&When work attributes failures to two units…\": 3-0 ✓",
+    "\"A2P produces actionable, causally-grounded node-le…\": 2-1 ✓",
+    "\"On the Who&When benchmark, A2P achieves state-of-t…\": 2-1 ✓",
+    "\"The paper develops and evaluates three distinct au…\": 3-0 ✓",
+    "\"Automated failure attribution is currently far fro…\": 2-1 ✓",
+    "\"In a reproduction of the Who&When (WW) log-based s…\": 3-0 ✓",
+    "Verify done: 25 claims → 24 confirmed, 1 killed"
+  ],
+  "result": {
+    "question": "Survey the most recent state-of-the-art (prioritize 2025, then 2024) methods for ATTRIBUTING and LOCALIZING errors/failures to specific NODES in existing agentic LLM workflows and multi-agent systems. Here a \"node\" means a discrete component of a workflow graph — variously called a node, agent, module, block, component, or tool-call step — NOT an individual chain-of-thought reasoning step (unless the method explicitly bridges step-level signals up to node/agent-level blame).\n\nCore questions to answer:\n1. What are the leading methods/benchmarks for automated failure attribution in multi-agent / compound LLM systems? (e.g., the \"Who&When\" automated failure attribution work, the MAST failure taxonomy from \"Why Do Multi-Agent LLM Systems Fail?\", TRAIL trace reasoning/error localization, Agent-as-a-Judge, AgentDebug, Microsoft's agentic failure-mode taxonomy, and any newer 2025 work.) For each: what UNIT do they attribute to, what algorithm (all-at-once vs step-by-step vs binary-search vs causal/counterfactual), what inputs (trace/log/graph), and reported accuracy.\n2. Terminology deep-dive: how do different papers define and use \"node\" vs \"block\" vs \"chunk\" vs \"span\" vs \"module\" vs \"agent\" vs \"step\"? Map which correspond to workflow-graph-NODE-level attribution (relevant to us) vs pure token/reasoning-step granularity (less relevant).\n3. Causal / counterfactual attribution approaches that pinpoint which node is responsible for a downstream failure (credit/blame assignment, ablation, intervention, counterfactual replay of a node).\n4. Methods that produce ACTIONABLE localization — output \"node X is the faulty node and here is the error category\" — so a targeted conservative fix (add a QC/self-check loop, insert a human-in-the-loop gate, add a missing tool call, or revise that node's prompt) can be applied to the EXISTING workflow.\n\nExplicitly EXCLUDE / down-weight: work that is ONLY chain-of-thought reasoning-step verification with no node/agent mapping (e.g., pure process reward models / ProcessBench-style step scoring); work that is ONLY textual-gradient or prompt-optimization (TextGrad, DSPy-style); and work that ONLY generates brand-new workflows from scratch (AFlow, ADAS, GPTSwarm-as-generator) rather than diagnosing/editing an existing one.\n\nDeliver: a cited report grouping methods by attribution unit and technique, with a comparison table (method, year, attribution granularity / \"node\" definition, algorithm, inputs, accuracy/benchmark, actionability for targeted node fixes), and a short synthesis of which approaches best support conservative node-level optimization of an existing agentic workflow.",
+    "summary": "The 2025 state-of-the-art for attributing failures to specific NODES (agents/steps/components) in agentic LLM workflows centers on the Who&When benchmark (Penn State/Duke, ICML 2025 Spotlight), which established the dual attribution unit — the \"failure-responsible agent\" (Who) and the \"decisive error step\" (When, the earliest mistake whose correction flips failure to success) — and the three canonical algorithms All-at-Once, Step-by-Step, and Binary Search. The field is far from solved: even SOTA reasoning models reach only ~53.5% agent-level and ~14.2% step-level accuracy on the original benchmark, motivating a wave of 2025 follow-ups that improve attribution via causal/counterfactual machinery. The strongest node-level methods are causal: A2P (arXiv 2509.10401) operationalizes Pearl's SCM (Abduct-Act-Predict with do()-operator) within a single inference pass to localize an (agent, step) pair (47.46% AG / 29.31% HC step-level); AgenTracer (arXiv 2509.03312) trains an 8B model via counterfactual replay + programmed fault injection to find the decisive (agent, step) and beats Gemini-2.5-Pro/Claude-4-Sonnet by up to 18.18%; and a Shapley-value + Performance-Causal-Inversion framework (arXiv 2509.08682) assigns agent-level blame and drives closed-loop repair (15.4%→37.8% task success). For actionability, A2P, AgenTracer, the Shapley/PCI method, and DoVer (Microsoft, arXiv 2512.06749) all close the loop to targeted fixes — DoVer distinctively reframes attribution as an intervention to be tested (Do-then-Verify) and argues single-node attribution is ill-posed because multiple distinct repairs can fix the same failure. Microsoft's April 2025 Taxonomy of Failure Modes is a complementary failure-TYPE vocabulary (safety/security × novel/existing, including inter-agent communication failures) but provides NO node-localization algorithm.",
+    "findings": [
+      {
+        "claim": "Who&When (ICML 2025 Spotlight) is the foundational benchmark: it defines the node-level attribution UNIT as both the 'failure-responsible agent' (Who) and the 'decisive error step' (When = earliest mistake whose correction flips failure to success, at conversation-turn not token granularity), and introduces the three canonical algorithms — All-at-Once (whole-trace single query), Step-by-Step (incremental sequential), Binary Search (recursive divide-and-conquer). These three algorithms ARE the origin of the algorithm taxonomy in the research question.",
+        "confidence": "high",
+        "vote": "3-0 (both constituent claims)",
+        "sources": [
+          "https://arxiv.org/abs/2505.00212"
+        ],
+        "evidence": "Primary peer-reviewed ICML 2025 Spotlight paper (Penn State + Duke, with DeepMind). Dataset = 127 LLM-MAS failure logs 'annotated with: (i) the failure-responsible agent, and (ii) the decisive error step.' Decisive error step defined as 'the earliest mistake whose correction would change failure into success.' Granularity is conversation-turn/message (history array of message objects), NOT token-level. Three methods confirmed verbatim across multiple fetches: All-at-Once (entire trace, single pass), Step-by-Step ('review the interaction log sequentially, making a judgment at each step'), Binary Search ('divide-and-conquer... partitioning the execution trace into halves and recursively narrowing'). Public code/data at github.com/ag2ai/Agents_Failure_Attribution. Two claims [21],[22] both 3-0."
+      },
+      {
+        "claim": "Automated failure attribution is far from solved: on Who&When the best method reaches only ~53.5% accuracy at identifying the responsible agent and just ~14.2% at pinpointing the decisive error step (some methods below random), and SOTA reasoning models OpenAI o1 and DeepSeek R1 'fail to achieve practical usability.' This unsolved-difficulty premise is the shared motivation across all 2025 follow-up work.",
+        "confidence": "high",
+        "vote": "2-1",
+        "sources": [
+          "https://arxiv.org/abs/2505.00212"
+        ],
+        "evidence": "Abstract verbatim: 'the best method achieves 53.5% accuracy in identifying failure-responsible agents but only 14.2% in pinpointing failure steps, with some methods performing below random. Even SOTA reasoning models, such as OpenAI o1 and DeepSeek R1, fail to achieve practical usability.' Caveats from the split vote: (a) 53.5%/14.2% are BEST-METHOD ceilings, separate from the o1/R1 usability sentence — the claim slightly conflates them; (b) the 14.2% step-level figure is the May-2025 baseline and has since been beaten ~2-3x by FALAT, A2P, AgenTracer, and the Shapley/PCI method, so 'currently reach only 14.2%' understates the present ceiling. Central conclusion (far from solved; o1/R1 not practically usable) is robust."
+      },
+      {
+        "claim": "A2P ('Abduct, Act, Predict', arXiv 2509.10401, Westlake/ResearAI, Sept 2025) is a causal-intervention method that localizes blame to a discrete (agent, step) pair — bridging step-level signal up to agent/node-level blame. It operationalizes Pearl's structural causal model in a single inference pass: (1) Abduct hidden root causes, (2) Act by defining a minimal corrective intervention via the do()-operator, (3) Predict by simulating the 3-5 turn counterfactual trajectory to verify whether correcting that one action would have averted failure — distinguishing decisive from incidental errors. It is an enhancement of All-at-Once (retains full-context access). The 'step' unit is a conversation turn pre-prefixed 'Step {idx} - Agent_Name'.",
+        "confidence": "high",
+        "vote": "3-0 (claims 17, 18)",
+        "sources": [
+          "https://arxiv.org/pdf/2509.10401",
+          "https://github.com/ResearAI/A2P"
+        ],
+        "evidence": "Verbatim from paper + official repo. Outputs 'the earliest agent-step pair that satisfies this causal chain.' Abduct: epsilon_t = argmax P(eps | s_0:t, a_t, Z=1); Act: do(a_t <- a_t*) ('applying the do()-operator in Pearl's causal calculus'); Predict: 'simulate the subsequent 3-5 turns... under the counterfactual condition.' Dual metrics: Agent-Level Accuracy + Step-Level Accuracy. Repo confirms 'Contextual Step Numbering: Explicit Step {idx} - Agent_Name: formatting.' Nuance: 'Predict' is the LLM simulating a trajectory in-context, NOT real re-execution. Source caveat: PDF footer says 'Discovered and authored by DeepScientist' (~95% AI-authored), which weakens confidence in empirical numbers but not the descriptive method facts."
+      },
+      {
+        "claim": "A2P sets the reported step-level SOTA on Who&When: 47.46% on Algorithm-Generated (2.85x over 16.67% All-at-Once; vs 27.78% Step-by-Step, 28.57% Binary Search) and 29.31% on Hand-Crafted (2.43x over 12.07% All-at-Once); agent-level 65.40% (AG) and 58.62% (HC).",
+        "confidence": "medium",
+        "vote": "2-1",
+        "sources": [
+          "https://arxiv.org/pdf/2509.10401"
+        ],
+        "evidence": "Every number verbatim-verified via pdftotext against Table 1 + prose. Multipliers reconcile exactly (47.46/16.67=2.85; 29.31/12.07=2.43). Down-weighted because: single non-peer-reviewed Sept-2025 preprint; deltas over next-best baselines are tiny (29.31 vs 28.57 ≈ one sample on n=58); possibly AI-auto-generated paper ('DeepScientist' footer). Descriptive-of-reported-results is appropriate for a survey, but numbers are NOT independently replicated."
+      },
+      {
+        "claim": "A2P produces actionable, causally-grounded node-level localization (failure-responsible agent + decisive step + latent-root-cause explanation) explicitly intended to enable targeted fixes rather than broad system changes, at ~25% token/time overhead, backward-compatible via a single --causal_reasoning CLI flag. This is among the most directly actionable for conservative node-level optimization of an existing workflow.",
+        "confidence": "medium",
+        "vote": "2-1",
+        "sources": [
+          "https://arxiv.org/pdf/2509.10401"
+        ],
+        "evidence": "Verbatim: 'enabling developers to perform targeted improvements rather than broad system modifications'; '25% increase in processing time and token count per sample'; '--causal_reasoning' flag 'ensures full backward compatibility.' Caveats: the 'causal' grounding is prompt-scaffolded reasoning within a single forward pass (not real interventional replay/ablation); the illustrative 'HotelAgent at Step 4 misinterpreted tomorrow' example is a plausible paraphrase, not a verbatim quote; same AI-authorship source caveat applies."
+      },
+      {
+        "claim": "AgenTracer (arXiv 2509.03312, Sept 2025) performs true agent/step-level blame attribution on real multi-agent frameworks (MetaGPT, AutoGen, AgentPrune, OpenHands, MaAS), localizing the responsible AGENT and the 'decisive error' step, formally the earliest agent-step pair (i*, t*) whose correction flips failure to success. Its annotation algorithm is explicitly causal/counterfactual: an analyzer agent performs counterfactual replay (replace action a_t with minimally-invasive oracle-corrected a'_t, re-simulate downstream) PLUS programmed fault injection (corrupt a step in a successful trajectory to induce failure, labeling that point the decisive error), producing the TracerTraj dataset.",
+        "confidence": "high",
+        "vote": "3-0 (claim 10); 2-1 (claim 11, dissent only on a taxonomy-framing nuance)",
+        "sources": [
+          "https://arxiv.org/abs/2509.03312",
+          "https://openreview.net/pdf/4ad6b1217a99a5f8e7a76d23157ebf94d0e328d6.pdf"
+        ],
+        "evidence": "Verbatim from PDF: task = 'Pinpointing the specific agent or step responsible for an error'; decisive error = 'the earliest action... whose correction is sufficient to steer the system from failure to success' (Eq. 4-5, arg min t). Algorithm 1 Part 1 titled 'Locate Decisive Errors via Counterfactual Intervention'; a'_t = pi_analyzer(...) 'minimally invasive, corrected action'; fault injection: corrupted a_t = Pi(a_t), if Omega=0 then <mu(t),t> is 'by definition, the decisive error.' Two distinct metrics: agent-level + step-level accuracy. Dissent on claim 11 was only that the paper's 'all-at-once' term refers to the trained tracer's inference setting, not the annotation pipeline — a labeling nuance, not a substantive refutation."
+      },
+      {
+        "claim": "AgenTracer-8B (lightweight, trained with multi-granular RL / modified GRPO) outperforms giant proprietary models Gemini-2.5-Pro and Claude-4-Sonnet by up to 18.18% on Who&When (~69.10% agent-level / 20.68% step-level on the handcrafted w/ ground-truth subset), against a backdrop where off-the-shelf SOTA reasoning LLMs score generally below 10%.",
+        "confidence": "medium",
+        "vote": "3-0",
+        "sources": [
+          "https://arxiv.org/abs/2509.03312",
+          "https://openreview.net/pdf/4ad6b1217a99a5f8e7a76d23157ebf94d0e328d6.pdf"
+        ],
+        "evidence": "Abstract verbatim 'by up 18.18%'; reconstructed Table 1 margins reconcile exactly (vs GPT-4.1 +26.0pp, vs Claude-4-Sonnet +12.2pp, vs Gemini-2.5-Pro +17.38≈18.18). 'below 10%' grounded in original Who&When (o1=10.34%/13.79%, DeepSeek-R1=3.45%/6.90% step-level on handcrafted). GRPO explicitly named. Medium confidence: single-source self-reported, not independently replicated; 'below 10%' is the hardest step-level metric (agent-level baselines far higher). Vote unanimous but the verifier flagged these as favorable-framing caveats."
+      },
+      {
+        "claim": "AgenTracer delivers actionable feedback (faulty agent + step + short reason) enabling conservative repair of EXISTING off-the-shelf multi-agent systems: 4.8-14.2% performance gains on MetaGPT, MaAS, OWL (e.g., +14.21% on MaAS+MATH-500, +4.8% on OWL+GAIA), beating Self-Refine and CRITIC (which can DEGRADE performance). Supports self-correcting/self-evolving workflows.",
+        "confidence": "high",
+        "vote": "3-0",
+        "sources": [
+          "https://arxiv.org/abs/2509.03312",
+          "https://openreview.net/pdf/4ad6b1217a99a5f8e7a76d23157ebf94d0e328d6.pdf"
+        ],
+        "evidence": "Abstract verbatim '4.8 ~ 14.2% performance gains'; Sec 5.3 confirms +14.21% MaAS+MATH-500 and +4.8% OWL+GAIA lower bound; 'outputs the responsible agent, step, and a short reason'; feedback injected over 3 rounds. CRITIC+MaAS+GAIA shown at -4.9%/-5.5%. Caveat: 'repair' here is reflective feedback-injection (3-round self-improvement loop), a looser sense than structural node edits (QC loop / HITL gate / prompt rewrite), but tracks the paper's own language. Corroborated by independent secondary review (themoonlight.io)."
+      },
+      {
+        "claim": "The Shapley + Performance-Causal-Inversion framework (arXiv 2509.08682, Sept 2025) attributes failures to agent-step-context triples via multi-granularity causal inference: SBSLocator (agent-level 'Who') uses Shapley values (marginal contribution across coalitions, Monte-Carlo approximated) combined with counterfactual outcomes, and CPIdentifier (step-level 'When') does causal deconfounding. Its core mechanism is the Performance Causal Inversion (PCI) principle: data-dependency edges in execution logs must be REVERSED in direction to build a correct performance causal graph, because information flow runs opposite to performance causation.",
+        "confidence": "high",
+        "vote": "3-0 (claims 0, 1, 2)",
+        "sources": [
+          "https://arxiv.org/html/2509.08682"
+        ],
+        "evidence": "Abstract: '(1) a performance causal inversion principle, which correctly models performance dependencies by reversing the data flow in execution logs, combined with Shapley values to accurately assign agent-level blame.' Node-set V={vi=(ai,si,ci)} = agent-step-context triples. Shapley quote verbatim ('treating each agent as a participant in a cooperative game... marginal contributions in different coalition combinations'); embedded in bottleneck score BS_j = phi_j × (Y_cf − Y_orig) × I; ablation shows removing Shapley drops step-level accuracy 11.7 points. PCI rationale: 'the direction of information flow is opposite to the direction of performance causality' (upstream data agent A errors causally determine downstream analyst B's failure). Consistent with established causal root-cause literature (backward dataflow traversal)."
+      },
+      {
+        "claim": "The Shapley/PCI framework reports SOTA on Who&When: agent-level 48.5% (Algo-Generated) / 56.8% (Hand-Crafted) and step-level 18.2% (Hand-Crafted, a >159% relative gain over the 7.02% Step-by-Step baseline); on TRAIL it reaches 44.6% step-level on GAIA and 14.3% on SWE-Bench.",
+        "confidence": "medium",
+        "vote": "3-0",
+        "sources": [
+          "https://arxiv.org/html/2509.08682"
+        ],
+        "evidence": "All numbers verbatim from Table 1/text; arithmetic checks ((18.2-7.02)/7.02=159.3%). Medium confidence: authors' self-reported single-source results, not independently reproduced. Note this method also evaluates on the TRAIL benchmark (GAIA + SWE-Bench traces), the other named trace-reasoning/error-localization benchmark in the research question."
+      },
+      {
+        "claim": "The Shapley/PCI framework demonstrates closed-loop actionable repair: a precise root-cause report feeds an optimization agent (GPT-4o) whose causal-guided repairs raised end-to-end task success from 15.4% to 37.8% (+22.4 points) over 50 failed Who&When trajectories, exceeding a random-repair control (18.3%).",
+        "confidence": "medium",
+        "vote": "3-0",
+        "sources": [
+          "https://arxiv.org/html/2509.08682"
+        ],
+        "evidence": "Table 2 Overall: Base 15.4 → Rand 18.3 → Causal 37.8, verbatim. Down-weight flags from verifier: no independent replication; 'success' evaluation method unspecified with GPT-4o doing both diagnosis AND repair (self-evaluation/circularity risk); random control under-specified; no significance test/CI on N=50 point estimates; 'conservative node-level fixing' is the claimant's editorial gloss — the paper repairs at step level by regenerating a 'revised solution' and re-executing, never characterized as minimal-edit."
+      },
+      {
+        "claim": "DoVer (Microsoft + Chinese Academy of Sciences, arXiv 2512.06749, Dec 2025/Jan 2026) is an intervention-driven (Do-then-Verify) auto-debugging pipeline that treats failure attribution as a HYPOTHESIS to be tested rather than a log-only inference. Four stages: (1) trial segmentation, (2) hypothesize a faulty step or agent, (3) generate a testable targeted edit (modified orchestrator instructions to sub-agents, or plan updates), (4) execute the intervention in-situ and differentially evaluate against the original run (task success + progress score), yielding a counterfactual trace that preserves all pre-intervention steps. Attribution unit = agent/step within a trial, validated causally via counterfactual replay.",
+        "confidence": "high",
+        "vote": "3-0 (claims 14, 15)",
+        "sources": [
+          "https://arxiv.org/pdf/2512.06749"
+        ],
+        "evidence": "Four stages verbatim (p.5). 'In DoVer, we treat attribution as a hypothesis to be tested. We apply a targeted edit at the implicated location (message, plan, tool call), and rerun the system, judging success by milestone/utility gains' (p.2). Two intervention categories: 'Modified Instructions to Sub-Agents' and 'Plan Updates' (p.6). In-situ partial replay 'All steps are preserved before the intervened step' yielding counterfactual trace tau_I (p.6). Hypothesis h_i=(agent, step index, reason). Note: the companion claim that DoVer flips 18%/28% of failed trials (Magnetic-One) was REFUTED 0-3 — treat DoVer's specific repair-rate numbers as unverified."
+      },
+      {
+        "claim": "DoVer argues single-step/single-agent attribution is fundamentally ill-posed because multiple distinct interventions can independently repair the same failed task and ground-truth labels are uncertain; it therefore replaces attribution-ACCURACY evaluation with outcome-oriented metrics (did the failure get resolved / quantifiable progress). This is an important methodological dissent for anyone relying on single-node blame.",
+        "confidence": "high",
+        "vote": "3-0",
+        "sources": [
+          "https://arxiv.org/pdf/2512.06749"
+        ],
+        "evidence": "Abstract verbatim: 'single-step or single-agent attribution is often ill-posed, as we find that multiple distinct interventions can independently repair the failed task'; 'rather than evaluating on attribution accuracy, we focus on measuring whether the system resolves the failure or makes quantifiable progress toward task success.' Sec 3: 'log-based failure attribution is fundamentally limited by the uncertainty of ground-truth annotations.' Minor: claim hardens 'often ill-posed' to 'fundamentally ill-posed' but the paper does say 'fundamentally limited' for the GT-label clause."
+      },
+      {
+        "claim": "In DoVer's reproduction of Who&When, two minimal prompt refinements — adding explicit step indices to the failure log and embedding a concise reminder of annotator guidance — raise GPT-4o step-attribution on WW-HandCrafted from 6% to 24% (All-at-Once, with ground-truth). Ground-truth uncertainty is the dominant limiter: 'certain' cases reach 44% (GPT-4o) / 53% (GPT-5) vs only 24% / 7% on 'uncertain' cases. Practical takeaway: cheap prompt-formatting and benchmark label-quality both materially move attribution accuracy.",
+        "confidence": "high",
+        "vote": "3-0",
+        "sources": [
+          "https://arxiv.org/pdf/2512.06749"
+        ],
+        "evidence": "Verbatim (Sec 3 + Table 5): '6% to 24%' for GPT-4o; refinements '(i) adding explicit step indices... (ii) embedding a concise reminder of the annotators guidance.' Certain/uncertain split: '14 uncertain cases, 24% GPT-4o / 7% GPT-5... certain 15 cases, 44% GPT-4o / 53% GPT-5.' Independently consistent with original Who&When (<10%/14.2% step-level baseline). This corroborates that the step-numbering trick used by both A2P and DoVer is a real, transferable lever."
+      },
+      {
+        "claim": "CausalFlow (arXiv 2605.25338, 2026) is a step-level causal/counterfactual attribution method computing 'Causal Responsibility Scores' (CRS) via step-level counterfactual intervention — CRS(s_i)=1 if any replacement of step s_i flips the verifier outcome failure→success after re-executing downstream. It is relevant to the counterfactual-blame technique category BUT is single-agent and step-granularity: it does NOT bridge step-CRS up to agent/node-level blame in a multi-agent graph, so it is LESS directly relevant to node-level workflow attribution.",
+        "confidence": "high",
+        "vote": "3-0 (claims 8, 9)",
+        "sources": [
+          "https://arxiv.org/abs/2605.25338"
+        ],
+        "evidence": "Abstract verbatim: 'computes Causal Responsibility Scores(CRS) via step-level counterfactual intervention to identify failure-inducing steps' — 'a purely interventional quantity computed by directly replacing candidate steps and propagating effects forward.' A 'step' = action (reasoning tokens OR tool call) + observation, typed REASONING/TOOL_CALL/TOOL_RESPONSE/LLM_RESPONSE/MEMORY_ACCESS/FINAL_ANSWER. Authors explicitly scope to 'single-agent sequential traces' and contrast with multi-agent DoVer. NOTE: this is a 2026 paper (knowledge-cutoff edge); included because it exemplifies the pure counterfactual-replay technique, but down-weight for node-level relevance."
+      },
+      {
+        "claim": "Microsoft's Taxonomy of Failure Modes in Agentic AI Systems (AI Red Team whitepaper, April 24 2025; v2.0 update June 2026) is a failure-TYPE taxonomy along two axes — safety vs security, and novel vs existing — NOT a failure-attribution/localization algorithm. It explicitly names NOVEL multi-agent failure categories including inter-agent communication-flow failures (agent injection, agent impersonation, agent flow manipulation, multi-agent jailbreaks), establishing node-level failure CATEGORIES, but provides no algorithm, no trace ingestion, no per-node blame output, and no localization accuracy.",
+        "confidence": "high",
+        "vote": "3-0 (claims 5, 6, 7)",
+        "sources": [
+          "https://www.microsoft.com/en-us/security/blog/2025/04/24/new-whitepaper-outlines-the-taxonomy-of-failure-modes-in-ai-agents/"
+        ],
+        "evidence": "PDF TOC is the 2x2 cross-product (novel/existing × safety/security). 'Novel failure modes are unique to agentic AI... such as failures that occur in the communication flow between agents within a multiagent system' (verbatim). Full-text sweep (attribut*/localiz*/root-cause/blame/which-agent/which-node) returned essentially zero attribution-method hits; only near-misses are a preventive Identity mitigation (unique agent IDs for audit trail) and a failure mode NAMED 'Insufficient transparency and accountability' (names the gap, doesn't solve it). Adversarial counter-search strengthens: Microsoft built SEPARATE later localization tools (AgentRx, 2026), implying this whitepaper lacked that capability. Complementary as a fix-categorization vocabulary, not an attribution engine."
+      }
+    ],
+    "caveats": "SOURCE QUALITY / RECENCY: (1) Nearly all node-level attribution methods (A2P, AgenTracer, Shapley/PCI, CausalFlow) are 2025-2026 arXiv preprints with author-reported, single-source, NOT-independently-replicated benchmark numbers; only Who&When (ICML 2025 Spotlight) is peer-reviewed. Treat all accuracy figures and repair-gain figures as self-reported. (2) A2P's PDF carries a 'Discovered and authored by DeepScientist' footer (~95% AI-authored), specifically undercutting confidence in its EMPIRICAL results (47.46%/29.31%) though not its method description. (3) CausalFlow (2605.25338) and the DoVer v3 revision (Jan 2026) sit at/after the assistant's Jan-2026 knowledge cutoff and could not be cross-checked against later literature.\n\nMETHODOLOGICAL: (4) The word 'causal' is used in two very different senses: A2P 'simulates' counterfactual trajectories inside a single LLM forward pass (in-context, no real re-execution), whereas AgenTracer, DoVer, and CausalFlow perform REAL re-execution/replay interventions on live systems — only the latter are genuinely interventional. (5) 'Conservative node-level fix' is largely the research framing, not the papers' own: AgenTracer's and the Shapley/PCI method's 'repairs' are reflective-feedback loops or full solution-regeneration + re-execution, not verified minimal/structural edits (QC loop, HITL gate, single prompt tweak). DoVer is the closest to a truly targeted single-location edit. (6) DoVer's central critique — that single-step/single-agent attribution is ill-posed because multiple repairs can fix the same failure — casts doubt on the very accuracy metrics the other methods optimize; the field has not reconciled accuracy-based vs outcome-based evaluation. (7) Benchmark label quality is a known confound: Who&When ground-truth is 'uncertain' on roughly half of hand-crafted cases, and cheap prompt formatting (step-numbering) alone moves GPT-4o from 6% to 24%.\n\nREFUTED (for transparency): DoVer's specific repair-flip rates (18% AssistantBench / 28% GAIA, 49% AG2/GSMPlus) were REFUTED 0-3 and should NOT be cited as established.\n\nSCOPE: Several methods named in the research question (TRAIL appears only as a benchmark the Shapley/PCI method evaluates on; MAST taxonomy, Agent-as-a-Judge, AgentDebug, FALAT, ECHO) were referenced in passing within these papers but did NOT surface as independently verified claims in this batch — absence here reflects the verification sample, not non-existence.",
+    "openQuestions": [
+      "How do the leading methods compare under a HEAD-TO-HEAD, independent (third-party) evaluation on the same Who&When/TRAIL splits? All reported gains are self-reported on differing subsets/settings, so the real ranking among A2P, AgenTracer, and the Shapley/PCI framework is unestablished.",
+      "DoVer argues single-node attribution is fundamentally ill-posed (multiple distinct repairs fix the same failure) — does this invalidate the accuracy-based leaderboards the other 2025 methods optimize, and should the field standardize on outcome-based (failure-resolved) metrics instead? This methodological conflict is unresolved.",
+      "Which approach best supports CONSERVATIVE minimal-edit fixing of an EXISTING workflow specifically? DoVer's targeted in-situ edits map most directly to 'add a QC loop / HITL gate / fix one prompt,' but no method has been evaluated on minimality/blast-radius of the fix vs full solution regeneration.",
+      "What is the role of the explicitly-named but un-surveyed methods (MAST taxonomy, TRAIL, Agent-as-a-Judge, AgentDebug, FALAT/2606.00765, ECHO/2510.04886, Microsoft AgentRx/2026, GraphTracer/2510.10581, RAFFLES/2509.06822, Aegis/2509.14295) — several were cited inside the verified papers as same-family work but were not independently verified in this batch and may change the comparative picture."
+    ],
+    "refuted": [
+      {
+        "claim": "DoVer's intervention-based repair produces measurable outcome improvements: within the Magnetic-One agent framework it flips 18% (AssistantBench) and 28% (GAIA) of previously failed trials into successes and validates or refutes 30-60% of failure hypotheses, and it generalizes to a different framework (AG2) and dataset (GSMPlus) with a 49% trial flip rate (~27.5% reported on GSMPlus trials in Table 2).",
+        "vote": "0-3",
+        "source": "https://arxiv.org/pdf/2512.06749"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://arxiv.org/html/2509.08682",
+        "quality": "primary",
+        "angle": "broad/primary — canonical named methods & benchmarks",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.microsoft.com/en-us/security/blog/2025/04/24/new-whitepaper-outlines-the-taxonomy-of-failure-modes-in-ai-agents/",
+        "quality": "primary",
+        "angle": "broad/primary — canonical named methods & benchmarks",
+        "claimCount": 5
+      },
+      {
+        "url": "https://arxiv.org/abs/2605.25338",
+        "quality": "primary",
+        "angle": "academic/technical — causal & counterfactual blame assignment",
+        "claimCount": 5
+      },
+      {
+        "url": "https://openreview.net/pdf/4ad6b1217a99a5f8e7a76d23157ebf94d0e328d6.pdf",
+        "quality": "primary",
+        "angle": "academic/technical — causal & counterfactual blame assignment",
+        "claimCount": 5
+      },
+      {
+        "url": "https://arxiv.org/pdf/2512.06749",
+        "quality": "primary",
+        "angle": "academic/technical — causal & counterfactual blame assignment",
+        "claimCount": 5
+      },
+      {
+        "url": "https://arxiv.org/pdf/2509.10401",
+        "quality": "primary",
+        "angle": "academic/technical — causal & counterfactual blame assignment",
+        "claimCount": 5
+      },
+      {
+        "url": "https://github.com/EIT-EAST-Lab/C3",
+        "quality": "primary",
+        "angle": "academic/technical — causal & counterfactual blame assignment",
+        "claimCount": 4
+      },
+      {
+        "url": "https://arxiv.org/abs/2505.00212",
+        "quality": "primary",
+        "angle": "terminology disambiguation — node vs span vs module vs step granularity",
+        "claimCount": 5
+      },
+      {
+        "url": "https://arxiv.org/abs/2505.08638",
+        "quality": "primary",
+        "angle": "terminology disambiguation — node vs span vs module vs step granularity",
+        "claimCount": 5
+      },
+      {
+        "url": "https://arxiv.org/abs/2510.10581",
+        "quality": "primary",
+        "angle": "terminology disambiguation — node vs span vs module vs step granularity",
+        "claimCount": 4
+      },
+      {
+        "url": "https://arxiv.org/abs/2509.03312",
+        "quality": "primary",
+        "angle": "terminology disambiguation — node vs span vs module vs step granularity",
+        "claimCount": 5
+      },
+      {
+        "url": "https://arxiv.org/abs/2503.13657",
+        "quality": "primary",
+        "angle": "terminology disambiguation — node vs span vs module vs step granularity",
+        "claimCount": 5
+      },
+      {
+        "url": "https://arxiv.org/html/2602.23701",
+        "quality": "primary",
+        "angle": "terminology disambiguation — node vs span vs module vs step granularity",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.microsoft.com/en-us/research/blog/systematic-debugging-for-ai-agents-introducing-the-agentrx-framework/",
+        "quality": "primary",
+        "angle": "practitioner/actionable — targeted node repair of existing workflows",
+        "claimCount": 5
+      },
+      {
+        "url": "https://arxiv.org/abs/2512.06749",
+        "quality": "primary",
+        "angle": "practitioner/actionable — targeted node repair of existing workflows",
+        "claimCount": 5
+      },
+      {
+        "url": "https://arxiv.org/html/2603.29848",
+        "quality": "primary",
+        "angle": "practitioner/actionable — targeted node repair of existing workflows",
+        "claimCount": 5
+      },
+      {
+        "url": "https://arxiv.org/abs/2509.25370",
+        "quality": "primary",
+        "angle": "recent frontier sweep — newest 2025 work beyond named anchors",
+        "claimCount": 5
+      },
+      {
+        "url": "https://arxiv.org/abs/2509.08682",
+        "quality": "primary",
+        "angle": "recent frontier sweep — newest 2025 work beyond named anchors",
+        "claimCount": 5
+      }
+    ],
+    "stats": {
+      "angles": 5,
+      "sourcesFetched": 18,
+      "claimsExtracted": 88,
+      "claimsVerified": 25,
+      "confirmed": 24,
+      "killed": 1,
+      "afterSynthesis": 16,
+      "urlDupes": 11,
+      "budgetDropped": 1,
+      "agentCalls": 100
+    }
+  }
+}
